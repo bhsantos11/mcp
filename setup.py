@@ -17,7 +17,7 @@ def read_requirements(filename):
 setup(
     name="mcp-demo-server",
     version="0.1.0",
-    description="A demo Model Context Protocol (MCP) server for customer analytics",
+    description="A Model Context Protocol (MCP) server for fetching messages from an API endpoint",
     long_description=read_readme(),
     long_description_content_type="text/markdown",
     author="Your Name",
@@ -47,7 +47,7 @@ setup(
         "Topic :: Software Development :: Libraries :: Python Modules",
         "Topic :: Scientific/Engineering :: Artificial Intelligence",
     ],
-    keywords="mcp model-context-protocol customer-analytics ai machine-learning",
+    keywords="mcp model-context-protocol api messages http-client",
     project_urls={
         "Bug Reports": "https://github.com/yourusername/mcp-demo-server/issues",
         "Source": "https://github.com/yourusername/mcp-demo-server",

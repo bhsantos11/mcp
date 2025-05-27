@@ -1,15 +1,13 @@
-# Customer Analytics MCP Server
+# Messages MCP Server
 
-A Model Context Protocol (MCP) server built with Python that provides customer predictive analytics and insights. This server demonstrates how to integrate customer data APIs with AI-powered analysis capabilities.
+A Model Context Protocol (MCP) server built with Python that provides access to messages from an external API endpoint. This server demonstrates how to integrate with external APIs using Authorization headers for authentication.
 
 ## Features
 
-- **Customer Data Resources**: Fetch comprehensive customer information by ID
-- **Predictive Analytics**: AI-driven predictions for churn, lifetime value, and purchase behavior
-- **Customer Segmentation**: Analyze customer segments and characteristics
-- **Risk Assessment**: Identify at-risk customers and retention opportunities
-- **External API Integration**: Connect to customer data endpoints
-- **Comprehensive Scoring**: Multi-factor customer scoring and grading system
+- **Messages Resource**: Fetch all messages from the configured API endpoint
+- **Authorization Header Authentication**: Uses Bearer token authentication
+- **Error Handling**: Comprehensive error handling for API requests
+- **Response Metadata**: Includes response time and status information
 
 ## Installation
 
@@ -107,21 +105,16 @@ To use this server with Claude Desktop, add the following to your Claude Desktop
 
 ### Available Resources
 
-- `customer://{customer_id}` - Comprehensive customer data by ID
-- `customer://{customer_id}/predictions` - AI-driven customer predictions
-- `analytics://segment/{segment_name}` - Customer segment analysis
+- `messages://{message_id}` - Fetch messages by ID from the API endpoint
 
-### Available Tools
+### API Request Format
 
-- `fetch_customer_from_api` - Fetch customer data from external API endpoint
-- `calculate_customer_score` - Calculate comprehensive customer score
-- `generate_customer_insights` - Generate AI-driven customer insights
-
-### Available Prompts
-
-- `analyze_customer_behavior` - Analyze customer behavior patterns
-- `create_retention_strategy` - Create customer retention strategy
-- `customer_health_check` - Perform customer health assessment
+When you access the `messages://{message_id}` resource, the server makes a GET request like this:
+```http
+GET https://api-url.com/messages?id=12345
+Authorization: Bearer your-token-here
+Content-Type: application/json
+```
 
 ## Architecture
 
@@ -136,10 +129,10 @@ The server is built using the FastMCP framework, which provides:
 
 The server can be configured through environment variables:
 
-- `MCP_SERVER_NAME` - Server name (default: "Customer Analytics Server")
+- `MCP_SERVER_NAME` - Server name (default: "Messages Server")
 - `MCP_LOG_LEVEL` - Logging level (default: "INFO")
-- `CUSTOMER_API_URL` - Base URL for customer API (default: "https://api.example.com")
-- `CUSTOMER_API_KEY` - API key for customer service (default: "demo-key")
+- `API_URL` - API endpoint URL (default: "https://api-url.com/messages")
+- `AUTHORIZATION_TOKEN` - Authorization header token (default: "Bearer your-token-here")
 
 ## Contributing
 
