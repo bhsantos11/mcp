@@ -16,21 +16,7 @@ A Model Context Protocol (MCP) server built with Python that provides customer p
 ### Prerequisites
 
 - Python 3.9 or higher
-- `uv` package manager (recommended) or `pip`
-
-### Using uv (Recommended)
-
-```bash
-# Clone the repository
-git clone <repository-url>
-cd mcp-demo-server
-
-# Install dependencies
-uv sync --dev --all-extras
-
-# Run the server
-uv run mcp-demo-server
-```
+- `pip` package manager
 
 ### Using pip
 
@@ -44,10 +30,23 @@ python -m venv venv
 source venv/bin/activate  # On Windows: venv\Scripts\activate
 
 # Install dependencies
-pip install -e ".[dev]"
+pip install -r requirements.txt
+
+# Install in development mode (optional)
+pip install -e .
 
 # Run the server
-mcp-demo-server
+python -m mcp_demo_server
+```
+
+### Development Installation
+
+```bash
+# Install development dependencies
+pip install -r requirements-dev.txt
+
+# Install package in editable mode
+pip install -e .
 ```
 
 ## Development
@@ -58,34 +57,34 @@ Use the MCP Inspector for testing and debugging:
 
 ```bash
 # Install MCP CLI tools
-uv add "mcp[cli]"
+pip install "mcp[cli]"
 
 # Run with inspector
-uv run mcp dev src/mcp_demo_server/server.py
+mcp dev src/mcp_demo_server/server.py
 ```
 
 ### Testing
 
 ```bash
 # Run tests
-uv run pytest
+pytest
 
 # Run tests with coverage
-uv run pytest --cov=mcp_demo_server
+pytest --cov=mcp_demo_server
 ```
 
 ### Code Quality
 
 ```bash
 # Format code
-uv run black src/ tests/
-uv run isort src/ tests/
+black src/ tests/
+isort src/ tests/
 
 # Lint code
-uv run ruff check src/ tests/
+ruff check src/ tests/
 
 # Type checking
-uv run mypy src/
+mypy src/
 ```
 
 ## Usage
@@ -98,8 +97,8 @@ To use this server with Claude Desktop, add the following to your Claude Desktop
 {
   "mcpServers": {
     "mcp-demo-server": {
-      "command": "uv",
-      "args": ["run", "mcp-demo-server"],
+      "command": "python",
+      "args": ["-m", "mcp_demo_server"],
       "cwd": "/path/to/mcp-demo-server"
     }
   }
